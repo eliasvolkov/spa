@@ -42,11 +42,34 @@ const View = {
         const content = document.querySelector('.content');
         content.innerHTML = `
         <div class="search card card-body mt-5">
-            <h1>Search Movie</h1>
-            <p class="lead">Enter a movie title to fetch a movie</p>
-            <input type="text" id="searchUser" class="form-control" placeholder="Movie title">
-        </div>
-        <div class="movie"></div>`
+                  <h1>Search Movie</h1>
+                  <p class="lead">Enter a movie title to fetch a movie</p>
+                <div class="row">
+                  <div class="col-sm-9">
+                      <input type="text" id="searchUser" class="form-control" placeholder="Movie title">
+                  </div>
+                  <div class="col-sm-3">
+                      <button type="button" id="search" class="btn btn-success">Success</button>
+                  </div>
+                </div>
+            </div>
+            <div class="movie row p-2 pt-5"></div>`
+    },
+    showMoviePoster(movies){
+        const content = document.querySelector('.movie');
+        let output = '';
+        movies.forEach(movie =>{
+             output += `
+                <div class="col-md-2">
+                    <div class="movie-poster">
+                        <img id="img" src="${movie.Poster}" style="width = 100%;">
+                        <p>${movie.Title}</p>
+                    </div>
+                </div> 
+            `
+            content.innerHTML = output;
+        });
+        
     },
 
     showAlert(textAlert){
