@@ -11,8 +11,7 @@ const Model  = {
     },
 
     getMovie(movie){
-        const movieKey = 'c5caa3fa735c6527a5756cea29cb17f3';
-        return fetch(`https://api.themoviedb.org/3/search/movie?api_key=${movieKey}&query=${movie}`)
+        return fetch(`http://www.omdbapi.com/?apikey=f0d54359&s=${movie}`)
             .then(res => res.json())
             .then(data => data)
             .catch(err => err)

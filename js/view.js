@@ -38,9 +38,15 @@ const View = {
 			`;
     },
 
-    showMovie(movie){
+    inputMovie(){
         const content = document.querySelector('.content');
-        
+        content.innerHTML = `
+        <div class="search card card-body mt-5">
+            <h1>Search Movie</h1>
+            <p class="lead">Enter a movie title to fetch a movie</p>
+            <input type="text" id="searchUser" class="form-control" placeholder="Movie title">
+        </div>
+        <div class="movie"></div>`
     },
 
     showAlert(textAlert){
