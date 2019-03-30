@@ -1,4 +1,15 @@
 const View = {
+    homeContent(){
+        const content = document.querySelector('.content');
+        content.innerHTML = `
+            <div class="jumbotron mt-5">
+                    <h1 class="display-3">Hello, world!</h1>
+                    <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+                    <hr class="my-4">
+                    <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+            </div>
+        `;
+    },
 
     inputUser(){
         const content = document.querySelector('.content');
@@ -6,13 +17,13 @@ const View = {
         <div class="search card card-body mt-5">
             <h1>Search GitHub Users</h1>
             <p class="lead">Enter a username to fetch a user profile and repos</p>
-            <input type="text" id="searchUser" class="form-control" placeholder="GitHub Username...">
+            <input type="text" id="searchInput" class="form-control" placeholder="GitHub Username...">
          </div>
-         <div class="user"></div>`
+         <div class="responce-fild"></div>`
     },
 
     showUser(user){
-        const content = document.querySelector('.user');
+        const content = document.querySelector('.responce-fild');
         content.innerHTML = `
 			<div class="card card-body mt-5">
 			<div class="row">
@@ -46,17 +57,17 @@ const View = {
                   <p class="lead">Enter a movie title to fetch a movie</p>
                 <div class="row">
                   <div class="col-sm-9">
-                      <input type="text" id="searchUser" class="form-control" placeholder="Movie title">
+                      <input type="text" id="searchInput" class="form-control" placeholder="Movie title">
                   </div>
                   <div class="col-sm-3">
                       <button type="button" id="search" class="btn btn-success">Success</button>
                   </div>
                 </div>
             </div>
-            <div class="movie row p-2 pt-5"></div>`
+            <div class="responce-fild row p-2 pt-5"></div>`
     },
-    showMoviePoster(movies){
-        const content = document.querySelector('.movie');
+    showMovies(movies){
+        const content = document.querySelector('.responce-fild');
         let output = '';
         movies.forEach(movie =>{
              output += `
@@ -72,11 +83,54 @@ const View = {
         
     },
 
+    showMovieDescr(movie){
+        const content = document.querySelector('.responce-fild');
+        const div = document.createElement('div');
+        div.className = 'modal-movie';
+
+        div.innerHTML = `
+            <div class="row">
+                <div class="card movie-descr col-md-8">
+                    <span class="close">&times;</span>
+                    <div class="row no-gutters">
+                        <div class="col-md-4">
+                            <div class="movie-descr__img">
+                                <img src="${movie.Poster}" class="card-img " alt="poster">
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h3 class="card-title text-muted">${movie.Title}</h3>
+                            <div class="card-text ml-3 mb-2 text-success">
+                                <i class="fa fa-clock-o mr-1"></i>
+                                ${movie.Runtime}
+                            </div>
+                            <p class="card-text text-muted"><em>${movie.Plot}</em></p>
+                            <p class="card-text text-muted">Actors: ${movie.Actors}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+        content.appendChild(div);
+        window.addEventListener('click', closeModal);
+
+        function closeModal(e) {
+            if(e.target.className == 'modal-movie' || e.target.className == 'close' ){
+                content.removeChild(div);  
+            }
+        }
+    },
+
     showAlert(textAlert){
-        const userField = document.querySelector('.user');
-        userField.innerHTML =`
+        const content = document.querySelector('.responce-fild');
+        content.innerHTML =`
           <div class="alert alert-danger mt-5" role="alert">
             ${textAlert}
           </div>`;
-      }
+      },
+    clearFields(){
+        document.querySelector('#searchInput').value = '';
+    }
 }

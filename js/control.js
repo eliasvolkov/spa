@@ -2,7 +2,7 @@ const Controller = {
     githubRoute (){
         View.inputUser();
     
-        document.querySelector('#searchUser').addEventListener('keyup', function (e){
+        document.querySelector('#searchInput').addEventListener('keyup', function (e){
             const userName = e.target.value;
             
                 
@@ -18,23 +18,25 @@ const Controller = {
                     .catch(err => err);
             
         });
-    }
-}
+    },
 
-document.querySelector('#movie').addEventListener('click', function (){
-    View.inputMovie();
+    movieRoute(){
+        View.inputMovie();
 
-    const movieTitle = document.querySelector('#searchUser');
+    const movieTitle = document.querySelector('#searchInput');
 
     document.querySelector('#search').addEventListener('click', function(e){
 
-        
         Model.getMovies(movieTitle.value)
             .then(data =>{
-                
-                View.showMoviePoster(data.Search);
-                const movies = document.querySelector('.movie');
-                return movies;
+                if(data.Response == "False"){
+                    View.showAlert('Sorry, movie is not found or there are too many results. Please, change your request');
+                }else{
+                    View.showMovies(data.Search);
+                    const movies = document.querySelector('.responce-fild');
+                    View.clearFields();
+                    return movies;
+                } 
             })
             .then(movies =>{
                 movies.addEventListener('click', function (e){
@@ -44,10 +46,19 @@ document.querySelector('#movie').addEventListener('click', function (){
                         const movieTitle = e.target.parentElement.textContent.trim();
                         
                         Model.getMovie(movieTitle)
-                            .then(data => console.log(data.Genre))
+                            .then(movie => {
+                                View.showMovieDescr(movie);
+                            })
                     }
                 })
             })
-    })
-})
+        
+        })
+    },
+
+    homeRoute(){
+        View.homeContent();
+    }
+}
+
 
