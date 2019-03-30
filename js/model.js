@@ -11,14 +11,14 @@ const Model  = {
     },
 
     getMovies(movie){
-        return fetch(`http://www.omdbapi.com/?apikey=f0d54359&s=${movie}`)
+        return fetch(`https://www.omdbapi.com/?apikey=f0d54359&s=${movie}`)
             .then(res => res.json())
             .then(data => data)
             .catch(err => err)
     },
 
     getMovie(movie){
-        return fetch(`http://www.omdbapi.com/?apikey=f0d54359&t=${movie}&plot=full`)
+        return fetch(`https://www.omdbapi.com/?apikey=f0d54359&t=${movie}&plot=full`)
             .then(res => res.json())
             .then(data => data)
             .catch(err => err)
